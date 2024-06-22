@@ -19,6 +19,12 @@ class User(AbstractUser):
     def __str__(self):
         return self.get_full_name()
 
+
+    class Meta:
+        db_table = 'User'
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+
 class Contact(models.Model):
     GOOD = 1
     EXCELLENT = 2
@@ -34,3 +40,10 @@ class Contact(models.Model):
     email = models.EmailField()
     message = models.TextField()
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=GOOD)
+
+
+    class Meta:
+        db_table = 'Contact'
+        verbose_name = 'contact'
+        verbose_name_plural = 'contacts'
+
