@@ -7,6 +7,11 @@ class User(AbstractUser):
     phone = models.CharField(max_length=20, null=True, blank=True)
     is_admin = models.BooleanField(default=False, verbose_name='Admin status')
 
+    class Meta:
+        db_table = 'User'
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+
     def get_full_name(self):
         if self.first_name:
             if self.last_name:
@@ -36,3 +41,8 @@ class Contact(models.Model):
     email = models.EmailField()
     message = models.TextField()
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=GOOD)
+
+    class Meta:
+        db_table = 'Contact'
+        verbose_name = 'contact'
+        verbose_name_plural = 'contacts'
