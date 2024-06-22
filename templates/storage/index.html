@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block main %}
+    <!-- Service Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Our Materials</h4>
+                <h1 class="display-4">Fresh & Organic Materials</h1>
+            </div>
+            <div class="row">
+                {% for material in materials %}
+                    <div class="col-lg-6 mb-5">
+                        <div class="row align-items-center">
+                            <div class="col-sm-5">
+                                <a href="{% url 'storage:update-material' material.id %}"
+                                   class="material-image-link"><img
+                                        class="img-fluid mb-3 mb-sm-0"
+                                        src="{% static 'base/img/service-1.jpg' %}"
+                                        alt=""></a>
+                            </div>
+                            <div class="col-sm-7">
+                                <h4><i class="fa fa-truck service-icon"></i><a
+                                        href="{% url 'storage:update-material' material.id %}"
+                                        class="material-name-link">{{ material.name }}</a>
+                                </h4>
+                                <p class="m-0"></p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+{% endblock %}
