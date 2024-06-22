@@ -18,8 +18,7 @@ class Product(models.Model):
     coffee = models.IntegerField(default=0)
     flour = models.IntegerField(default=0)
     chocolate = models.IntegerField(default=0)
-    categories = models.ManyToManyField(Category, related_name="products", verbose_name="categories", blank=True,
-                                        null=True)
+    categories = models.ManyToManyField(Category, related_name="products", verbose_name="categories", blank=True)
 
     class Meta:
         verbose_name = 'product'
