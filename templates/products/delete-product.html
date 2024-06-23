@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<form method="post">
+    {% csrf_token %}
+    Do you want to delete <strong>{{ product.name }} ?</strong>
+    <button type="submit">Yes.</button>
+    <a href="{% url 'products:update' product.id %}">No.</a>
+</form>
+
+
+</body>
+</html>
