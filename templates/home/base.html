@@ -10,7 +10,7 @@
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="/static/base/img/favicon.ico" rel="icon">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -47,7 +47,7 @@
 
                     {% if user.is_admin %}
                         <a href="{% url 'accounts:logout' %}" class="nav-item nav-link my-login">Log Out</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'accounts:contact-page' %}" class="nav-item nav-link">Contact</a>
                         <a href="service.html" class="nav-item nav-link">History</a>
                         <a href="menu.html" class="nav-item nav-link">Cart</a>
                         <a href="{% url 'storage:materials' %}" class="nav-item nav-link">Materials</a>
@@ -62,7 +62,7 @@
                         </div>
                     {% else %}
                         <a href="index.html" class="nav-item nav-link my-login">Log Out</a>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="{% url 'accounts:contact-page' %}" class="nav-item nav-link">Contact</a>
                         <a href="service.html" class="nav-item nav-link">History</a>
                         <a href="menu.html" class="nav-item nav-link">Cart</a>
                         <div class="nav-item dropdown">
@@ -78,7 +78,7 @@
 
                 {% else %}
                     <a href="{% url 'accounts:login' %}" class="nav-item nav-link active my-login">Log in</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="{% url 'accounts:contact-page' %}" class="nav-item nav-link">Contact</a>
                     <a href="service.html" class="nav-item nav-link">History</a>
                     <a href="menu.html" class="nav-item nav-link">Cart</a>
                     <div class="nav-item dropdown">
