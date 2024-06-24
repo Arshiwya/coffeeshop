@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from .models import Product, Category
 
 
@@ -60,3 +60,22 @@ class DeleteCategoryView(DeleteView):
     context_object_name = 'category'
     template_name = 'products/delete-category.html'
     success_url = '/'
+
+
+class ProductListView(ListView):
+    model = Product
+    queryset = Product.objects.all()
+    template_name = 'products/products-list.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=None, **kwargs)
+        categories = Category.objects.all()
+        context['categories'] = categories
+        return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'products/product-details.html'
+    context_object_name = 'product'
