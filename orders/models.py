@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 
 class Order(models.Model):
     STATUS_VOID = 0
@@ -8,9 +7,9 @@ class Order(models.Model):
     STATUS_CANCELED = 20
     STATUS_CHOICES = (
 
-        (STATUS_VOID,'Unknown'),
-        (STATUS_PAID,'Paid'),
-        (STATUS_CANCELED,'Canceled by user.')
+        (STATUS_VOID, 'Unknown'),
+        (STATUS_PAID, 'Paid'),
+        (STATUS_CANCELED, 'Canceled by user.')
     )
 
     user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
@@ -20,7 +19,6 @@ class Order(models.Model):
     status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=STATUS_VOID)
     created_time = models.DateTimeField(auto_now_add=True)
     updated_time = models.DateTimeField(auto_now=True)
-
 
     class Meta:
         db_table = 'Order'
@@ -35,7 +33,6 @@ class Discount(models.Model):
     start_date = models.DateTimeField(auto_now=True)
     end_date = models.DateTimeField(auto_now=True)
     created_time = models.DateTimeField(auto_now_add=True)
-
 
     class Meta:
         db_table = 'Discount'

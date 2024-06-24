@@ -1,0 +1,106 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block main %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
+             style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Contact</h1>
+            <div class="d-inline-flex mb-lg-5">
+                <p class="m-0 text-white"><a class="text-white" href="">Home</a></p>
+                <p class="m-0 text-white px-2">/</p>
+                <p class="m-0 text-white">Contact</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <div id="contact-page" class="container">
+        <div class="bg">
+
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="contact-form">
+                        <h2 class="title text-end">Contact us:</h2>
+                        <hr>
+                        <div class="status alert alert-success" style="display: none"></div>
+                        <style>
+
+                            .custom-input {
+                                width: 100%;
+                                padding: 10px;
+                                border: 1px solid #ccc;
+                                border-radius: 5px;
+                                margin-bottom: 10px;
+                                box-sizing: border-box; /* Ensure padding is included in width */
+                            }
+
+
+                            .custom-input:focus {
+                                outline: none;
+                                border-color: #80bdff;
+                                box-shadow: 0 0 5px #80bdff;
+                            }
+
+                            .btn-primary {
+                                padding: 10px 20px;
+                                background-color: #007bff;
+                                border: none;
+                                color: #fff;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                        </style>
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="id_name">Name</label>
+                                <input type="text" id="id_name" name="name" class="custom-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_email">Email</label>
+                                <input type="email" id="id_email" name="email" class="custom-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_message">Message</label>
+                                <textarea id="id_message" name="message" class="custom-input" rows="5"
+                                          required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id_status">Status</label>
+                                <select id="id_status" name="status" class="custom-input">
+                                    <option value="1">Good</option>
+                                    <option value="2">Excellent</option>
+                                    <option value="3">Bad</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-secondary">Submit</button>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="contact-info">
+                        <h2 class="title text-center">Contact Info:</h2>
+                        <hr>
+                        <address class="card-body">
+                            <p>CoffeeShop</p>
+                            <p>Tehran, Iran</p>
+                            <p>Enghelab street</p>
+                            <p>Mobile: +989389657353</p>
+                            <p>Email: mathisall82@gmail.com</p>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/#contact-page-->
+
+{% endblock %}
