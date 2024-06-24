@@ -8,10 +8,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from .models import User,Contact
-from .forms import SignUserForm,ContactForm
+from .models import User, Contact
+from .forms import SignUserForm, ContactForm
 from .mixins import AnonymousUserMixin
-
 
 
 class SignUserView(AnonymousUserMixin, CreateView):
@@ -80,5 +79,3 @@ class ContactView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
-

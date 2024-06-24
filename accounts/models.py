@@ -46,3 +46,6 @@ class Contact(models.Model):
         db_table = 'Contact'
         verbose_name = 'contact'
         verbose_name_plural = 'contacts'
+
+    def __str__(self):
+        return self.user.get_full_name()
