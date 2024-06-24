@@ -1,0 +1,45 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
+             style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Menu</h1>
+            <div class="d-inline-flex mb-lg-5">
+                <p class="m-0 text-white"><a class="text-white" href="{% url 'home:home' %}">Home</a></p>
+                <p class="m-0 text-white px-2">/</p>
+                <p class="m-0 text-white"><a class="text-white" href="{% url 'products:home' %}">Menu</a></p>
+                <p class="m-0 text-white px-2">/</p>
+                <p class="m-0 text-white"><a class="text-white"
+                                             href="{% url 'products:details' product.id %}">{{ product.name }}</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <div class="product-details">
+
+        <div class="product-details__image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-details__image__image">
+
+        </div>
+
+        <div class="product-details__detail">
+            <h2 class="product-details__detail__name">{{ product.name }}</h2>
+            <p class="product-details__detail__description">{{ product.description }}</p>
+            <h5 class="product-details__detail__price">{{ product.price }}$</h5>
+
+            <button class="product-details__detail__btn"><a href="#" class="product-details__detail__btn__link">Add to cart</a>
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
