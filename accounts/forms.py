@@ -1,5 +1,7 @@
 from django import forms
 from .models import User, Contact
+from django.contrib.auth.forms import PasswordResetForm
+
 
 
 class SignUserForm(forms.ModelForm):
@@ -14,3 +16,12 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ["name", "email", "message", "status"]
+
+class MyPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(label="Email", max_length=254)
+
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if not User.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError("User with this email does not exist")
+        return email
