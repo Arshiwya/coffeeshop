@@ -26,6 +26,10 @@ class User(AbstractUser):
     def __str__(self):
         return self.get_full_name()
 
+    def save(self, *args, **kwargs):
+        super(User, self).save(*args, **kwargs)
+        Cart.objects.create(user=self)
+
 
 class Contact(models.Model):
     GOOD = 1
