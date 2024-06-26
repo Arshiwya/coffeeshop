@@ -1,4 +1,9 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+from django.db.models import F
+from products.models import Product
 
 
 class Order(models.Model):
@@ -38,3 +43,43 @@ class Discount(models.Model):
         db_table = 'Discount'
         verbose_name = 'discount'
         verbose_name_plural = 'discounts'
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'Cart'
+        verbose_name = 'cart'
+        verbose_name_plural = 'carts'
+
+    def __str__(self):
+        return f"Cart for {self.user}"
+    def clear(self):
+        self.cartitem_set.all().delete()
+
+
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart,related_name='cartitems', verbose_name='cart',on_delete=models.CASCADE)
+    item = models.ForeignKey(Product,related_name='cartitems',verbose_name='item', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        db_table = 'CartItem'
+        verbose_name = 'cartitem'
+        verbose_name_plural = 'cartitems'
+
+    def increment_quantity(self):
+        self.quantity = F('quantity') + 1
+        self.save()
+
+    def decrement_quantity(self):
+        if self.quantity > 1:
+            self.quantity = F('quantity') -1
+            self.save()
+        else:
+            self.delete()
+
