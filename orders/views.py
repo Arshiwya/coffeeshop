@@ -5,8 +5,6 @@ from django.views.generic import ListView, DetailView, View, UpdateView
 from .models import Cart, CartItem
 
 
-# Create your views here.
-
 class CartDetailView(DetailView):
     model = Cart
     template_name = 'orders/cart_detail.html'
@@ -18,31 +16,6 @@ class CartItemUpdate(UpdateView):
     fields = ['quantity']
     template_name = 'orders/cart_update.html'
     success_url = reverse_lazy('cart_detail')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # class OrderListView(ListView):
 #     model = Order
