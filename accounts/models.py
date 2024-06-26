@@ -7,6 +7,7 @@ from orders.models import Cart, CartItem
 class User(AbstractUser):
     phone = models.CharField(max_length=20, null=True, blank=True)
     is_admin = models.BooleanField(default=False, verbose_name='Admin status')
+    email = models.EmailField(unique=True, verbose_name='email', null=False, blank=False)
 
     class Meta:
         db_table = 'User'
@@ -28,7 +29,8 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
-        Cart.objects.create(user=self)
+        if not Cart.objects.filter(user=self).exists():
+            Cart.objects.create(user=self)
 
 
 class Contact(models.Model):

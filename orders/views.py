@@ -1,14 +1,25 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, View, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Cart, CartItem
 
 
-class CartDetailView(DetailView):
+class CartDetailView(LoginRequiredMixin, DetailView):
     model = Cart
     template_name = 'orders/cart_detail.html'
     context_object_name = 'cart'
+    login_url = '/users/login/?next=/orders/cart_detail/'
+
+    def get_object(self, queryset=None):
+        if Cart.objects.filter(user=self.request.user).exists():
+            cart = Cart.objects.get(user=self.request.user)
+            return cart
+
+        else:
+            cart = Cart.objects.create(user=self.request.user)
+            return cart
 
 
 class CartItemUpdate(UpdateView):

@@ -49,15 +49,18 @@ class SignUserView(AnonymousUserMixin, CreateView):
 class LoginPageView(LoginView):
     template_name = 'accounts/login-page.html'
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
     def form_valid(self, form):
         auth_login(self.request, form.get_user())
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return '/'
+        url = self.request.get_full_path()
+
+        if '?next=/orders/cart_detail/' in url:
+            return '/orders/cart_detail/'
+
+        else:
+            return '/'
 
 
 class LogoutUserView(View):

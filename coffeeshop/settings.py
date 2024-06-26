@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-l66tn*n+uee=fbwtwub*^e93k&@c)f$z@qp29c8i+%a4cq=p2d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -126,6 +126,8 @@ STATIC_ROOT = '/static/'
 
 MEDIA_ROOT = 'media/'
 MEDIA_URL = '/media/'
+
+AUTHENTICATION_BACKENDS = ['accounts.backends.EmailOrUsernameBackend', 'django.contrib.auth.backends.ModelBackend']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

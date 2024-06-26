@@ -1,23 +1,37 @@
 {% extends 'home/base.html' %}
 {% block main %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible"
-    content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    <title>Cart Detail</title>
-</head>
-<body>
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
+             style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Your Cart</h1>
+            <div class="d-inline-flex mb-lg-5">
+                <p class="m-0 text-white"><a class="text-white" href="{% url 'home:home' %}">Home</a></p>
+                <p class="m-0 text-white px-2">/</p>
+                <p class="m-0 text-white">Cart</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
     <h3>
-        Cart Detail
+        Your Cart Detail
     </h3>
-    <p>
-        Created at: {{ cart.created_time }}
+    <p style="padding-left: 20px">
+        user :{{ cart.user.get_full_name }}
+        <br>
+
+        {% if cart.cartitems.all.exists %}
+            {% for product in cart.cartitems.all %}
+                - <b>{{ product.item.name }}</b>
+            {% endfor %}
+        {% else %}
+            <h2>Nothing to buy here :(</h2>
+        {% endif %}
+
     </p>
 
-</body>
-</html>
 {% endblock %}
+

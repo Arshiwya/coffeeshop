@@ -118,3 +118,18 @@
 .product-details__detail__btn__link:hover {
     text-decoration: none;
 }
+
+
+.non-field-error {
+    position: absolute;
+    top: 90px;
+    background-color: #ffaeae;
+    padding: 10px 80px;
+    border-radius: 25px;
+    color: #b20000;
+}
+
+
+.non-field-error__text {
+
+}

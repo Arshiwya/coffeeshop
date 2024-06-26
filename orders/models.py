@@ -56,21 +56,20 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart for {self.user}"
+
     def clear(self):
-        self.cartitem_set.all().delete()
-
-
+        CartItem.clear(cart=self)
 
 
 class CartItem(models.Model):
-    cart = models.ForeignKey(Cart,related_name='cartitems', verbose_name='cart',on_delete=models.CASCADE)
-    item = models.ForeignKey(Product,related_name='cartitems',verbose_name='item', on_delete=models.CASCADE)
+    cart = models.ForeignKey(Cart, related_name='cartitems', verbose_name='cart', on_delete=models.CASCADE)
+    item = models.ForeignKey(Product, related_name='cartitems', verbose_name='item', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
 
     class Meta:
         db_table = 'CartItem'
-        verbose_name = 'cartitem'
-        verbose_name_plural = 'cartitems'
+        verbose_name = 'cart item'
+        verbose_name_plural = 'cart items'
 
     def increment_quantity(self):
         self.quantity = F('quantity') + 1
@@ -78,8 +77,13 @@ class CartItem(models.Model):
 
     def decrement_quantity(self):
         if self.quantity > 1:
-            self.quantity = F('quantity') -1
+            self.quantity = F('quantity') - 1
             self.save()
         else:
             self.delete()
 
+    def clear(self, cart):
+        cart_items = self.objects.get(cart=cart)
+
+        for item in cart_items:
+            item.delete()
