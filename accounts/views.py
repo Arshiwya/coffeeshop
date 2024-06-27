@@ -11,6 +11,10 @@ from django.core.exceptions import ValidationError
 from .models import User, Contact
 from .forms import SignUserForm, ContactForm
 from .mixins import AnonymousUserMixin
+from django.contrib.auth.views import PasswordResetView
+from .forms import MyPasswordResetForm
+
+
 
 
 class SignUserView(AnonymousUserMixin, CreateView):
@@ -79,3 +83,10 @@ class ContactView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+
+class MyPasswordResetView(PasswordResetView):
+    form_class = MyPasswordResetForm
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_email.html'
+    subject_template_name = 'password_reset_subject.txt'
