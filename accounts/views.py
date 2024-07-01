@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.base import View
+from django.views.generic.base import View, TemplateView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login as auth_login
@@ -87,6 +87,9 @@ class ContactView(CreateView):
 
 class MyPasswordResetView(PasswordResetView):
     form_class = MyPasswordResetForm
-    template_name = 'password_reset.html'
+    template_name = 'accounts/password_reset.html'
     email_template_name = 'password_reset_email.html'
     subject_template_name = 'password_reset_subject.txt'
+
+class AboutView(TemplateView):
+    template_name = 'accounts/history.html'

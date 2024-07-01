@@ -15,7 +15,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False, verbose_name="name")
-    description = models.TextField(null=False)
+    description = models.TextField(null=True)
     sugar = models.IntegerField(default=0)
     coffee = models.IntegerField(default=0)
     flour = models.IntegerField(default=0)

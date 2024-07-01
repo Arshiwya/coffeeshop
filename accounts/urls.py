@@ -1,7 +1,7 @@
 from django.urls import path, include
 from .views import (SignUserView, LoginPageView,
                     LogoutUserView, ContactView,
-                    MyPasswordResetView)
+                    AboutView)
 
 from django.contrib.auth import views as auth_views
 from django.urls import path
@@ -32,16 +32,8 @@ urlpatterns = [
 
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),name= 'password_reset_complete'),
 
-
-
-
-
-
-
-
-
-
     path('contact_page/', ContactView.as_view(), name='contact-page'),
+    path('about_us/',AboutView.as_view(), name='about us' )
 
     ]
 
